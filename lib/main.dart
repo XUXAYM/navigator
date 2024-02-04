@@ -24,16 +24,23 @@ class DemoApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
   final String title;
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _lastCounter = 0;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
@@ -42,9 +49,14 @@ class HomePage extends StatelessWidget {
             const Text(
               'Push the button to see Counter:',
             ),
+            Text('Last counter: $_lastCounter'),
             ElevatedButton(
-              onPressed: () {
-                _onOpenCounter(context);
+              onPressed: () async {
+                final lastCounter =
+                    await _onOpenCounter(context) ?? _lastCounter;
+                setState(() {
+                  _lastCounter = lastCounter;
+                });
               },
               child: const Text('Open Counter'),
             ),
@@ -54,12 +66,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Future<void> _onOpenCounter(BuildContext context) async {
-    await Navigator.push(
+  Future<int?> _onOpenCounter(BuildContext context) async {
+    return await Navigator.push<int>(
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return CounterPage(title: title);
+          return CounterPage(
+            title: DemoApp.title,
+            lastCounter: _lastCounter,
+          );
         },
       ),
     );
@@ -67,9 +82,14 @@ class HomePage extends StatelessWidget {
 }
 
 class CounterPage extends StatefulWidget {
-  const CounterPage({super.key, required this.title});
+  const CounterPage({
+    super.key,
+    required this.title,
+    required this.lastCounter,
+  });
 
   final String title;
+  final int lastCounter;
 
   @override
   State<CounterPage> createState() => _CounterPageState();
@@ -77,6 +97,12 @@ class CounterPage extends StatefulWidget {
 
 class _CounterPageState extends State<CounterPage> {
   int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _counter = widget.lastCounter;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +142,7 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _onGoBack() {
-    Navigator.pop(context);
+    Navigator.pop(context, _counter);
     // Navigator.of(context).pop();
   }
 }
