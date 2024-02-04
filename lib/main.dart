@@ -55,7 +55,14 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> _onOpenCounter(BuildContext context) async {
-    //TODO
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return CounterPage(title: title);
+        },
+      ),
+    );
   }
 }
 
@@ -109,6 +116,7 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _onGoBack() {
-    //TODO
+    Navigator.pop(context);
+    // Navigator.of(context).pop();
   }
 }
