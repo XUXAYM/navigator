@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "args": [
+                "--no-sound-null-safety",
+            ],
+            
+        },
+        {
+            "name": "Profile",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "args": [
+                "--profile",
+                "--no-sound-null-safety",
+            ],
+        }
+    ]
+}
