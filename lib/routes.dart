@@ -14,11 +14,35 @@ abstract class RouteNames {
 abstract class RoutesBuilder {
   const RoutesBuilder._();
 
-  static final routes = <String, Widget Function(BuildContext)>{
-    //TODO
-  };
+  // static final routes = <String, Widget Function(BuildContext)>{
+  //   RouteNames.home: (_) => const HomePage(
+  //         title: DemoApp.title,
+  //       ),
+  //   RouteNames.counter: (_) => const CounterPage(
+  //         title: DemoApp.title,
+  //       ),
+  // };
 
   static Route<Object?>? onGenerateRoute(RouteSettings settings) {
-    //TODO
+    switch (settings.name) {
+      case RouteNames.home:
+        return MaterialPageRoute(
+          builder: (_) => const HomePage(
+            title: DemoApp.title,
+          ),
+          settings: settings,
+        );
+
+      case RouteNames.counter:
+        return MaterialPageRoute<int?>(
+          builder: (_) => CounterPage(
+            title: DemoApp.title,
+            lastCounter: settings.arguments as int? ?? 0,
+          ),
+          settings: settings,
+        );
+    }
+
+    return null;
   }
 }

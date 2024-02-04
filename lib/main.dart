@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'routes.dart';
+
 void main() {
   runApp(const DemoApp());
 }
@@ -11,15 +13,15 @@ class DemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const home = HomePage(title: title);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: home,
+      // initialRoute: RouteNames.initialRoute,
+      // routes: RoutesBuilder.routes,
+      onGenerateRoute: RoutesBuilder.onGenerateRoute,
     );
   }
 }
@@ -67,16 +69,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<int?> _onOpenCounter(BuildContext context) async {
-    return await Navigator.push<int>(
+    return await Navigator.pushNamed<int?>(
       context,
-      MaterialPageRoute(
-        builder: (BuildContext context) {
-          return CounterPage(
-            title: DemoApp.title,
-            lastCounter: _lastCounter,
-          );
-        },
-      ),
+      RouteNames.counter,
+      arguments: _lastCounter,
     );
   }
 }
