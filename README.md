@@ -1,6 +1,6 @@
 # navigator
 
-A new Flutter project.
+Flow: main -> push_pop -> arguments_and_result -> named_routes_template -> named_routes -> navigator_key_template -> navigator_key -> dialogs_and_modal_template -> dialogs_and_modals -> tab_bar -> overlay_template -> overlay
 
 ## Getting Started
 
