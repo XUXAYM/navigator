@@ -93,35 +93,45 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Push the button to see Counter:',
+    return Navigator(
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Push the button to see Counter:',
+                  ),
+                  Text('Last counter: $_lastCounter'),
+                  ElevatedButton(
+                    onPressed: () async {
+                      final lastCounter =
+                          await _onOpenCounter(context) as int? ?? _lastCounter;
+                      setState(() {
+                        _lastCounter = lastCounter;
+                      });
+                    },
+                    child: const Text('Open Counter'),
+                  ),
+                ],
+              ),
             ),
-            Text('Last counter: $_lastCounter'),
-            ElevatedButton(
-              onPressed: () async {
-                final lastCounter =
-                    await _onOpenCounter(context) as int? ?? _lastCounter;
-                setState(() {
-                  _lastCounter = lastCounter;
-                });
-              },
-              child: const Text('Open Counter'),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
   Future<dynamic> _onOpenCounter(BuildContext context) async {
-    return await NavigationManager.instance.openCounter(
-      DemoApp.title,
-      lastCounter: _lastCounter,
+    return Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CounterPage(
+          title: DemoApp.title,
+          lastCounter: _lastCounter,
+        ),
+      ),
     );
   }
 }
@@ -152,9 +162,6 @@ class _CounterPageState extends State<CounterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
