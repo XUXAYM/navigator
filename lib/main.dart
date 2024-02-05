@@ -145,7 +145,9 @@ class CounterPage extends StatefulWidget {
 class _CounterPageState extends State<CounterPage> {
   int _counter = 0;
 
-  // TODO final _overlayEntry
+  final _overlayEntry = OverlayEntry(
+    builder: (_) => const MyOverlay(),
+  );
 
   @override
   void initState() {
@@ -230,11 +232,15 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _showOverlay() {
-    // TODO
+    if (!_overlayEntry.mounted) {
+      Overlay.of(context).insert(_overlayEntry);
+    }
   }
 
   void _hideOverlay() {
-    // TODO
+    if (_overlayEntry.mounted) {
+      _overlayEntry.remove();
+    }
   }
 }
 
