@@ -11,8 +11,8 @@ class NavigationManager {
 
   NavigatorState get _navigator => key.currentState!;
 
-  Future<int?> openCounter(String title, {required int lastCounter}) async {
-    return await _navigator.pushNamed<int?>(
+  Future<dynamic> openCounter(String title, {required int lastCounter}) async {
+    return await _navigator.pushNamed(
       RouteNames.counter,
       arguments: lastCounter,
     );
