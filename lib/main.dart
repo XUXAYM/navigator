@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'dialogs.dart';
@@ -143,6 +145,8 @@ class CounterPage extends StatefulWidget {
 class _CounterPageState extends State<CounterPage> {
   int _counter = 0;
 
+  // TODO final _overlayEntry
+
   @override
   void initState() {
     super.initState();
@@ -190,6 +194,20 @@ class _CounterPageState extends State<CounterPage> {
                 ),
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: _showOverlay,
+                  child: const Text('Show overlay'),
+                ),
+                const SizedBox(width: 40),
+                ElevatedButton(
+                  onPressed: _hideOverlay,
+                  child: const Text('Hide overlay'),
+                ),
+              ],
+            ),
             ElevatedButton(
               onPressed: _onGoBack,
               child: const Text('Go Back'),
@@ -210,4 +228,35 @@ class _CounterPageState extends State<CounterPage> {
     Navigator.pop(context, _counter);
     // Navigator.of(context).pop();
   }
+
+  void _showOverlay() {
+    // TODO
+  }
+
+  void _hideOverlay() {
+    // TODO
+  }
+}
+
+class MyOverlay extends StatelessWidget {
+  const MyOverlay({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: _getRandomHeight(context),
+      left: Random().nextInt(MediaQuery.of(context).size.width ~/ 2).toDouble(),
+      child: Container(
+        height: _getRandomHeight(context),
+        width: _getRandomWidth(context),
+        color: Colors.red.withOpacity(0.5),
+      ),
+    );
+  }
+
+  double _getRandomHeight(BuildContext context) =>
+      Random().nextInt(MediaQuery.of(context).size.height ~/ 2).toDouble();
+
+  double _getRandomWidth(BuildContext context) =>
+      Random().nextInt(MediaQuery.of(context).size.width ~/ 2).toDouble();
 }
