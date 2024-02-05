@@ -5,13 +5,32 @@ abstract class Dialogs {
   const Dialogs._();
 
   static Future<bool?> showConfirmDialog(BuildContext context) async {
-    // TODO
-    return true;
+    final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
+
+    return isCupertino
+        ? showCupertinoDialog<bool>(
+            context: context,
+            builder: (context) => const ConfirmDialog(),
+          )
+        : showDialog<bool>(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => const ConfirmDialog(),
+          );
   }
 
   static Future<bool?> showConfirmModal(BuildContext context) async {
-    // TODO
-    return true;
+    final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
+
+    return isCupertino
+        ? showCupertinoModalPopup(
+            context: context,
+            builder: (context) => const ConfirmModal(),
+          )
+        : showModalBottomSheet(
+            context: context,
+            builder: (context) => const ConfirmModal(),
+          );
   }
 }
 

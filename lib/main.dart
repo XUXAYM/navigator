@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'dialogs.dart';
 import 'navigation.dart';
 import 'routes.dart';
 
@@ -121,6 +122,26 @@ class _CounterPageState extends State<CounterPage> {
             ElevatedButton(
               onPressed: _incrementCounter,
               child: const Icon(Icons.add),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    final confirmed = await Dialogs.showConfirmDialog(context);
+                    print(confirmed);
+                  },
+                  child: const Text('Show dialog'),
+                ),
+                const SizedBox(width: 40),
+                ElevatedButton(
+                  onPressed: () async {
+                    final confirmed = await Dialogs.showConfirmModal(context);
+                    print(confirmed);
+                  },
+                  child: const Text('Show modal'),
+                ),
+              ],
             ),
             ElevatedButton(
               onPressed: _onGoBack,
