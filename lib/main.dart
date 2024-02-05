@@ -20,9 +20,9 @@ class DemoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // initialRoute: RouteNames.initialRoute,
-      // routes: RoutesBuilder.routes,
-      onGenerateRoute: RoutesBuilder.onGenerateRoute,
+      initialRoute: RouteNames.initialRoute,
+      routes: RoutesBuilder.routes,
+      // onGenerateRoute: RoutesBuilder.onGenerateRoute,
       navigatorKey: NavigationManager.instance.key,
     );
   }
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               onPressed: () async {
                 final lastCounter =
-                    await _onOpenCounter(context) ?? _lastCounter;
+                    await _onOpenCounter(context) as int? ?? _lastCounter;
                 setState(() {
                   _lastCounter = lastCounter;
                 });
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<int?> _onOpenCounter(BuildContext context) async {
+  Future<dynamic> _onOpenCounter(BuildContext context) async {
     return await NavigationManager.instance.openCounter(
       DemoApp.title,
       lastCounter: _lastCounter,
