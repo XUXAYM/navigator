@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'navigation.dart';
 import 'routes.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class DemoApp extends StatelessWidget {
       // initialRoute: RouteNames.initialRoute,
       // routes: RoutesBuilder.routes,
       onGenerateRoute: RoutesBuilder.onGenerateRoute,
+      navigatorKey: NavigationManager.instance.key,
     );
   }
 }
@@ -69,10 +71,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<int?> _onOpenCounter(BuildContext context) async {
-    return await Navigator.pushNamed<int?>(
-      context,
-      RouteNames.counter,
-      arguments: _lastCounter,
+    return await NavigationManager.instance.openCounter(
+      DemoApp.title,
+      lastCounter: _lastCounter,
     );
   }
 }
@@ -138,7 +139,6 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _onGoBack() {
-    Navigator.pop(context, _counter);
-    // Navigator.of(context).pop();
+    NavigationManager.instance.pop(_counter);
   }
 }

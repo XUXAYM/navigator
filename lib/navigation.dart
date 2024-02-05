@@ -5,17 +5,20 @@ import 'routes.dart';
 class NavigationManager {
   NavigationManager._();
 
-  // TODO static final instance
+  static final instance = NavigationManager._();
 
-  // TODO final key
+  final key = GlobalKey<NavigatorState>();
 
-  // TODO NavigatorState get _navigator
+  NavigatorState get _navigator => key.currentState!;
 
   Future<int?> openCounter(String title, {required int lastCounter}) async {
-    // TODO
+    return await _navigator.pushNamed<int?>(
+      RouteNames.counter,
+      arguments: lastCounter,
+    );
   }
 
-  void pop() {
-    // TODO
+  void pop([dynamic result]) {
+    _navigator.pop(result);
   }
 }
