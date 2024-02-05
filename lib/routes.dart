@@ -14,14 +14,16 @@ abstract class RouteNames {
 abstract class RoutesBuilder {
   const RoutesBuilder._();
 
-  // static final routes = <String, Widget Function(BuildContext)>{
-  //   RouteNames.home: (_) => const HomePage(
-  //         title: DemoApp.title,
-  //       ),
-  //   RouteNames.counter: (_) => const CounterPage(
-  //         title: DemoApp.title,
-  //       ),
-  // };
+  static final routes = <String, Widget Function(BuildContext)>{
+    RouteNames.home: (_) => const HomePage(),
+    RouteNames.counter: (context) {
+      final data = ModalRoute.of(context)?.settings.arguments as int?;
+      return CounterPage(
+        title: DemoApp.title,
+        lastCounter: data ?? 0,
+      );
+    },
+  };
 
   static Route<Object?>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
