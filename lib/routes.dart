@@ -27,9 +27,7 @@ abstract class RoutesBuilder {
     switch (settings.name) {
       case RouteNames.home:
         return MaterialPageRoute(
-          builder: (_) => const HomePage(
-            title: DemoApp.title,
-          ),
+          builder: (_) => const HomePage(),
           settings: settings,
         );
 

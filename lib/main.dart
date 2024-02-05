@@ -30,23 +30,70 @@ class DemoApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _lastCounter = 0;
+  int _index = 0;
+
+  final _tabs = const <Widget>[
+    HomeContent(index: 0, key: ValueKey(0)),
+    HomeContent(index: 1, key: ValueKey(1)),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text(DemoApp.title),
       ),
+      // body: _tabs[_index]
+      body: IndexedStack(
+        index: _index,
+        children: _tabs,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _index,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.looks_one_outlined),
+            label: 'first',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.looks_two_outlined),
+            label: 'second',
+          ),
+        ],
+        onTap: (index) {
+          if (_index != index) {
+            setState(() {
+              _index = index;
+            });
+          }
+        },
+      ),
+    );
+  }
+}
+
+class HomeContent extends StatefulWidget {
+  const HomeContent({super.key, required this.index});
+
+  final int index;
+
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  int _lastCounter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -160,6 +207,7 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _onGoBack() {
-    NavigationManager.instance.pop(_counter);
+    Navigator.pop(context, _counter);
+    // Navigator.of(context).pop();
   }
 }
