@@ -15,9 +15,7 @@ abstract class RoutesBuilder {
   const RoutesBuilder._();
 
   static final routes = <String, Widget Function(BuildContext)>{
-    RouteNames.home: (_) => const HomePage(
-          title: DemoApp.title,
-        ),
+    RouteNames.home: (_) => const HomePage(),
     RouteNames.counter: (context) {
       final data = ModalRoute.of(context)?.settings.arguments as int?;
       return CounterPage(
