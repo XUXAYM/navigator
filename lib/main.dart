@@ -115,7 +115,6 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _onGoBack() {
-    Navigator.pop(context);
-    // Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 }
