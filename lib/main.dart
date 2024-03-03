@@ -121,9 +121,9 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Future<dynamic> _onOpenCounter(BuildContext context) async {
-    return await NavigationManager.instance.openCounter(
-      DemoApp.title,
-      lastCounter: _lastCounter,
+    return await Navigator.of(context).pushNamed(
+      RouteNames.counter,
+      arguments: _lastCounter,
     );
   }
 }
@@ -209,7 +209,6 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _onGoBack() {
-    Navigator.pop(context, _counter);
-    // Navigator.of(context).pop();
+    Navigator.of(context).pop(_counter);
   }
 }
