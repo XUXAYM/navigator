@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(DemoApp.title),
       ),
-      // body: _tabs[_index]
+      //body: _tabs[_index],
       body: IndexedStack(
         index: _index,
         children: _tabs,
@@ -98,6 +98,8 @@ class _HomeContentState extends State<HomeContent> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text('Page ${widget.index + 1}'),
+            const SizedBox(height: 32),
             const Text(
               'Push the button to see Counter:',
             ),
