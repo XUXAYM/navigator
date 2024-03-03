@@ -16,11 +16,17 @@ abstract class Dialogs {
 }
 
 class ConfirmDialog extends StatelessWidget {
-  const ConfirmDialog({Key? key}) : super(key: key);
+  final bool? isCupertino;
+
+  const ConfirmDialog({
+    this.isCupertino,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
+    final isCupertino =
+        this.isCupertino ?? Theme.of(context).platform == TargetPlatform.iOS;
 
     return isCupertino
         ? CupertinoAlertDialog(
@@ -55,11 +61,16 @@ class ConfirmDialog extends StatelessWidget {
 }
 
 class ConfirmModal extends StatelessWidget {
-  const ConfirmModal({Key? key}) : super(key: key);
+  final bool? isCupertino;
+  const ConfirmModal({
+    this.isCupertino,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final isCupertino = Theme.of(context).platform == TargetPlatform.iOS;
+    final isCupertino =
+        this.isCupertino ?? Theme.of(context).platform == TargetPlatform.iOS;
 
     return isCupertino
         ? CupertinoActionSheet(
