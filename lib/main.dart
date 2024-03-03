@@ -37,12 +37,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _index = 0;
+  // TODO
+  //int _index
 
-  final _tabs = const <Widget>[
-    HomeContent(index: 0, key: ValueKey(0)),
-    HomeContent(index: 1, key: ValueKey(1)),
-  ];
+  // TODO
+  //final _tabs;
 
   @override
   Widget build(BuildContext context) {
@@ -50,31 +49,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text(DemoApp.title),
       ),
-      //body: _tabs[_index],
-      body: IndexedStack(
-        index: _index,
-        children: _tabs,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _index,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.looks_one_outlined),
-            label: 'first',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.looks_two_outlined),
-            label: 'second',
-          ),
-        ],
-        onTap: (index) {
-          if (_index != index) {
-            setState(() {
-              _index = index;
-            });
-          }
-        },
-      ),
+      // TODO
+      body: const HomeContent(index: 0),
+      // TODO
+      //bottomNavigationBar:
     );
   }
 }
