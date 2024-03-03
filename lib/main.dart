@@ -55,8 +55,7 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> _onOpenCounter(BuildContext context) async {
-    await Navigator.push(
-      context,
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
           return CounterPage(title: title);
