@@ -15,7 +15,7 @@ class NavigationManager {
     // TODO
   }
 
-  void pop() {
+  void pop(Object? argument) {
     // TODO
   }
 }
